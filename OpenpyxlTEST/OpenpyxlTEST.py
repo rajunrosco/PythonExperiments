@@ -11,7 +11,10 @@ import openpyxl.styles.numbers as Numbers  # the numbers module contains Format 
 
 def TEST():
     print("Execute TEST")
-    wb = pyxl.load_workbook("test.xlsm", keep_vba=True)
+    if os.path.exists("test.xlm"):
+        wb = pyxl.load_workbook("test.xlsm", keep_vba=True)
+    else:
+        wb = pyxl.Workbook()
     ws = wb.active
 
     for row in ws.rows:
@@ -65,32 +68,27 @@ def TEST3():
 
 from openpyxl import Workbook, load_workbook, worksheet
 def TEST4():
+    wb = load_workbook("test3.xlsx")
+    ws = wb.active
 
-	wb = load_workbook("test3.xlsx")
-	ws = wb.active
+    #worksheet.Worksheet.iter_rows()
 
-	#worksheet.Worksheet.iter_rows()
+    last_row = ws.max_row
+    last_col = ws.max_column
 
-	last_row = ws.max_row
-	last_col = ws.max_column
-	#while ws.cell(column=1, row=last_row).value is None and last_row > 0:
-	#last_row -= 1
+    xlTableDict = {}
+    rownum = 0
+    for row in ws.iter_rows(max_row=last_row, max_col=last_col):
+        rownum+=1
+        rowdata =[]
+        for col in row:
+            rowdata.append(col.value)
+        print("--")
+        xlTableDict["row{}".format(rownum)] = tuple(rowdata)
 
-	xlTableDict = {}
-	rownum = 0
-	for row in ws.iter_rows(max_row=last_row, max_col=last_col):
-		rownum+=1
-		rowdata =[]
-		for col in row:
-			rowdata.append(col.value)
-		print("--")
-		xlTableDict["row{}".format(rownum)] = tuple(rowdata)
-		#xlTableDict["row{}".format(rownum)] = (rowdata[0], rowdata[1], rowdata[2])
-
-	for key, value in xlTableDict.items():
-		print(repr(value))
-
-
+    for key, value in xlTableDict.items():
+        print(repr(value))
+    print("TEST4 complete...")
 
 
 
@@ -103,15 +101,14 @@ def TEST4():
 
 def Main(argv):
 
-    #TEST()
+    TEST()
 
-    #TEST2()
+    TEST2()
 
-    #TEST3()
-	
-	TEST4()
-	
-	
+    TEST3()
+
+    TEST4()
+
 
 
 
