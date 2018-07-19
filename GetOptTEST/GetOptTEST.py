@@ -29,8 +29,6 @@ def print_usage():
 
 def Main(argv):
 
-
-
     try:
         opts, args = getopt.getopt(sys.argv[1:],
                                    '?h',                # each character represents a sort option -?, -H
@@ -52,12 +50,28 @@ def Main(argv):
     print("opts: "+repr(opts))
     print("args: "+repr(args))
 
-    for opt, val in opts:
-        if opt in ['-?','-h','--help']:
-            print_usage()
-            sys.exit(0)
-        if opt in ['--test1','--test2']:
-            print('TEST MODE')
+    optdict = {x[0]:x[1] for x in opts}    #dictionary comprehension to fill optdict
+
+    #for opt, val in opts:
+    #    if opt in ['-?','-h','--help']:
+    #        print_usage()
+    #        sys.exit(0)
+    #    if opt in ['--test1','--test2']:
+    #        print('TEST MODE')
+
+
+    if set(['--test1','--test2']).issubset(optdict):
+        print("test1 and test2")
+        sys.exit(0)
+    if set(['--help','--test2']).issubset(optdict):
+        print("help and test2")
+        sys.exit(0)
+    if set(['--test1','--help']).issubset(optdict):
+        print("help and test1")
+        sys.exit(0)
+    if '--test1' in opts:
+        print("test1")
+        sys.exit(0)
 
 
 

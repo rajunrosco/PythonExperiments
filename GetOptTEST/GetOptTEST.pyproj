@@ -12,7 +12,7 @@
     <Name>GetOptTEST</Name>
     <RootNamespace>GetOptTEST</RootNamespace>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>--test2=Benson</CommandLineArguments>
+    <CommandLineArguments>--test1 --help  --test2 arg2 arg1</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
