@@ -22,6 +22,12 @@ def DictComprehensionTests():
     # another way of accomplishing zip() function will return a dictionary instead of zip object
     dictzip = { keylist[i]:vallist[i] for i in range(0,len(keylist)) } if len(keylist)==len(vallist) else {}
 
+    # sort by dictionary's value
+    sortedvals = sorted(dictzip, key=dictzip.get)
+    reversesortedvals = sorted(dictzip, key=dictzip.get, reverse=True)
+
+    reversedictzip = { val:key for key, val in dictzip.items() }
+
     # zip function creates zip object of tuples that combine 2 lists
     dictzip2 = zip(keylist, vallist)
 
