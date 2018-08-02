@@ -1,6 +1,6 @@
 import os
 import sys
-
+from functools import reduce
 
 def FilterTest():
     keylist = ["a","a|ps4","b","b|ps4","b|win64","c","c|win64"]
@@ -12,6 +12,8 @@ def FilterTest():
 
     keybaselist = list( map(lambda x:  x.split('|')[0] if len(x.split('|'))==2 else None, keylist ))
     keybaselist = list(filter(lambda x : x is not None, keybaselist))
+
+    concatlist = reduce(lambda x,y : x +','+ y, keylist)
 
 
     stop = 1
