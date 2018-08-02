@@ -11,6 +11,10 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "GetOptTEST", "GetOptTEST\Ge
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ListComprehensionTEST", "ListComprehensionTEST\ListComprehensionTEST.pyproj", "{C1D1D2CF-EABB-4A93-81F8-969B85A995F7}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CollectionFunctions", "CollectionFunctions\CollectionFunctions.pyproj", "{29441697-06B3-43AD-AD16-67486AD36225}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DecoratorTest", "DecoratorTest\DecoratorTest.pyproj", "{D8AECBBC-B271-4554-BC4D-D0C813C36A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +29,10 @@ Global
 		{9EA26573-BB34-4F4F-8B6D-FCCC8EA21208}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1D1D2CF-EABB-4A93-81F8-969B85A995F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1D1D2CF-EABB-4A93-81F8-969B85A995F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29441697-06B3-43AD-AD16-67486AD36225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29441697-06B3-43AD-AD16-67486AD36225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
