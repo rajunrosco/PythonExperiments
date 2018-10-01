@@ -1,0 +1,12 @@
+{ 
+	# Platform
+    "win64": {
+		# BuildType : BuildPath
+        "loose": "//slc-files/windowsnoeditor/loose",
+        "package": "//slc-files/windowsnoeditor/package"
+    },
+    "xboxone": {
+        "loose": "//slc-files/xboxone/loose",
+        "package": "//slc-files/xboxone/package"
+    }
+}

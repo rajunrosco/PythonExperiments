@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BeautifulSoupTEST", "BeautifulSoupTEST\BeautifulSoupTEST.pyproj", "{9CA3A232-D70A-4D3E-84C5-CA077FAE7D17}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "OpenpyxlTEST", "OpenpyxlTEST\OpenpyxlTEST.pyproj", "{D58E0866-846E-433C-96FF-338361329959}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "GetOptTEST", "GetOptTEST\GetOptTEST.pyproj", "{9EA26573-BB34-4F4F-8B6D-FCCC8EA21208}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ListComprehensionTEST", "ListComprehensionTEST\ListComprehensionTEST.pyproj", "{C1D1D2CF-EABB-4A93-81F8-969B85A995F7}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CollectionFunctions", "CollectionFunctions\CollectionFunctions.pyproj", "{29441697-06B3-43AD-AD16-67486AD36225}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DecoratorTest", "DecoratorTest\DecoratorTest.pyproj", "{D8AECBBC-B271-4554-BC4D-D0C813C36A55}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ClassTest", "ClassTest\ClassTest.pyproj", "{E475EB35-673B-4867-B423-0473C894D759}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CA3A232-D70A-4D3E-84C5-CA077FAE7D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CA3A232-D70A-4D3E-84C5-CA077FAE7D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D58E0866-846E-433C-96FF-338361329959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D58E0866-846E-433C-96FF-338361329959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA26573-BB34-4F4F-8B6D-FCCC8EA21208}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA26573-BB34-4F4F-8B6D-FCCC8EA21208}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D1D2CF-EABB-4A93-81F8-969B85A995F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D1D2CF-EABB-4A93-81F8-969B85A995F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29441697-06B3-43AD-AD16-67486AD36225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29441697-06B3-43AD-AD16-67486AD36225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E475EB35-673B-4867-B423-0473C894D759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E475EB35-673B-4867-B423-0473C894D759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

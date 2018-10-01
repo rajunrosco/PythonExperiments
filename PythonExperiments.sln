@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "BeautifulSoupTEST", "BeautifulSoupTEST\BeautifulSoupTEST.pyproj", "{9CA3A232-D70A-4D3E-84C5-CA077FAE7D17}"
 EndProject
@@ -14,6 +14,12 @@ EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CollectionFunctions", "CollectionFunctions\CollectionFunctions.pyproj", "{29441697-06B3-43AD-AD16-67486AD36225}"
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DecoratorTest", "DecoratorTest\DecoratorTest.pyproj", "{D8AECBBC-B271-4554-BC4D-D0C813C36A55}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ClassTest", "ClassTest\ClassTest.pyproj", "{E475EB35-673B-4867-B423-0473C894D759}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "pyinstaller_configTEST", "pyinstaller_configTEST\pyinstaller_configTEST.pyproj", "{A4DEC2D6-F493-4C3F-A5DB-7E850ACD452D}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "JSON", "JSON\JSON.pyproj", "{68CD355C-15E5-42DD-82C2-0883926EE5E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +39,17 @@ Global
 		{29441697-06B3-43AD-AD16-67486AD36225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E475EB35-673B-4867-B423-0473C894D759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E475EB35-673B-4867-B423-0473C894D759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4DEC2D6-F493-4C3F-A5DB-7E850ACD452D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4DEC2D6-F493-4C3F-A5DB-7E850ACD452D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68CD355C-15E5-42DD-82C2-0883926EE5E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68CD355C-15E5-42DD-82C2-0883926EE5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7C15929-0715-49FC-BE78-D32A6B2380D8}
 	EndGlobalSection
 EndGlobal
