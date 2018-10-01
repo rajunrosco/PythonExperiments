@@ -89,7 +89,48 @@ def TEST4():
     for key, value in xlTableDict.items():
         print(repr(value))
     print("TEST4 complete...")
+    
+#Fill a big table	
+def TEST5():
+	wb = pyxl.Workbook()
+	ws = wb.active
+	
+	for i in range(1,20000):
+		ws.cell(row=i, column=1, value="Key"+repr(i))
+		ws.cell(row=i, column=2, value="Text"+repr(i))
+		if ((i % 100) == 0):
+			print( repr(i))
+			
+	wb.save("testBIG.xlsx")
+	
+	wb.close()
+	
+#Read big table	
+def TEST6():
+	wb = load_workbook("testBIG.xlsx")
+	ws = wb.active
+	
+	f = open('testBIG.xml','w')
+	f.write('<Root>\n')
+	
+	for i in range(1,ws.max_row):
+		f.write('	<String>\n')
+		for j in range(1,4):
+			if j == 1: f.write('		<Key>'+ws.cell(row=i,column=j).value+'</Key>\n')
+			if j == 2: f.write('		<Text>'+ws.cell(row=i,column=j).value+'</Text>\n')
+			if j == 3:
+				#pdb.set_trace()
+				currentcell = ws.cell(row=i, column=j)
+				if currentcell.value is None:
+					f.write('		<Comment></Comment>\n')
+		f.write('	</String>\n')
+		if ((i % 100) == 0):
+			print( repr(i))
+			
 
+	f.write('</Root>\n')
+	f.close()
+	wb.close()
 
 
 ######################################################################################################################################################################
@@ -108,6 +149,10 @@ def Main(argv):
     TEST3()
 
     TEST4()
+    
+    TEST5()
+    
+    TEST6()
 
 
 
