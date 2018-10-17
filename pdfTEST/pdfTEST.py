@@ -25,6 +25,7 @@ for filename in pdfFiles:
     for pageNum in range(0, pdfReader.numPages):
         pageObj = pdfReader.getPage(pageNum)
         pdfWriter.addPage(pageObj)
+    pdfFileObj.close()
 
 # Save the resulting PDF to a file.
 pdfOutput = open('pdfMERGED.pdf', 'wb')
