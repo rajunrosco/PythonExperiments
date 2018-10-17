@@ -9,7 +9,7 @@ import openpyxl as pyxl
 import openpyxl.styles.numbers as Numbers  # the numbers module contains Format definitions
 
 
-def TEST():
+def UnicodeTest1():
     print("Execute TEST")
     if os.path.exists("test.xlm"):
         wb = pyxl.load_workbook("test.xlsm", keep_vba=True)
@@ -32,7 +32,7 @@ def TEST():
 
     print("TEST complete...")
     
-def TEST2():
+def UnicodeTest2():
     # test insertion of UTF8 character into a cell
     print("execute TEST2")
 
@@ -47,7 +47,7 @@ def TEST2():
     print("TEST2 complete...")
 
 
-def TEST3():
+def CreateTest3():
     #test format cell to be currency
     
     wb = pyxl.Workbook()
@@ -67,7 +67,7 @@ def TEST3():
 
 
 from openpyxl import Workbook, load_workbook, worksheet
-def TEST4():
+def LoadTest3():
     wb = load_workbook("test3.xlsx")
     ws = wb.active
 
@@ -91,7 +91,7 @@ def TEST4():
     print("TEST4 complete...")
     
 #Fill a big table	
-def TEST5():
+def CreateBigXL():
 	wb = pyxl.Workbook()
 	ws = wb.active
 	
@@ -106,7 +106,7 @@ def TEST5():
 	wb.close()
 	
 #Read big table	
-def TEST6():
+def ExportBigXL2XML():
 	wb = load_workbook("testBIG.xlsx")
 	ws = wb.active
 	
@@ -132,6 +132,67 @@ def TEST6():
 	f.close()
 	wb.close()
 
+def CellNavigationTest():
+    wb = pyxl.Workbook()
+    ws = wb.active
+
+    ws["A1"] = "A1"
+    temp = ws["A1"].value
+    ws.cell(row=1, column=2, value="A2")
+
+    a3cell = ws.cell(row=3, column=1)
+    temp = a3cell.coordinate    # returns string coordinate of cell "A3"
+    temp = a3cell.column        # returns sting of column "A"
+
+
+
+    wb.save("testcell.xlsx")
+    wb.close()
+
+from openpyxl.styles import Color, PatternFill, Font, Border
+from openpyxl.workbook.defined_name import DefinedName
+
+def RangeTest():
+    wb = pyxl.Workbook()
+    #ws = wb.active
+
+    ws = wb.create_sheet()
+    ws.title = 'Pi'
+    ws['F5'] = 3.14
+    named_range = wb.create_named_range("Pi",ws, "F5", 0)
+
+    temp = type(named_range)
+
+    wb.defined_names.append("myrange")
+    #wb.add_named_range(named_range)
+
+
+    myrange = wb.defined_names('myrange')
+    range_dests = myrange.destinations
+
+    redFill = PatternFill(start_color='FFFF0000',end_color='FFFF0000', fill_type='solid')
+
+    myrange = ws.defined_range(ws["D1":"F10"])
+    range_dests = myrange.destinations
+    for cell in range_dests:
+        cell.fill = redFill
+
+    colC = ws['C']
+
+   
+    col_range = ws[2:2]
+    for cell in col_range:
+        temp = cell.coordinate
+        cell.fill = redFill
+
+
+
+    row10 = ws[10]
+    row_range = ws[5:10]
+
+    wb.save("testrange.xlsx")
+    wb.close
+
 
 ######################################################################################################################################################################
 #
@@ -142,19 +203,9 @@ def TEST6():
 
 def Main(argv):
 
-    TEST()
+    iStop = 1
 
-    TEST2()
-
-    TEST3()
-
-    TEST4()
-    
-    TEST5()
-    
-    TEST6()
-
-
+    #RangeTest()
 
 
 # If module is executed by name using python.exe, enter script through Main() method.  If it is imported as a module, Main() is never executed at it is used as a library

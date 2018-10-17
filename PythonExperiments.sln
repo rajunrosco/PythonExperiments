@@ -15,6 +15,10 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "CollectionFunctions", "Coll
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DecoratorTest", "DecoratorTest\DecoratorTest.pyproj", "{D8AECBBC-B271-4554-BC4D-D0C813C36A55}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B59B8268-B7FB-4ED1-AC98-5B4AE5E0E302}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "pdfTEST", "pdfTEST\pdfTEST.pyproj", "{DF600C22-5F1D-4F3B-9FAB-3A7FCA2CCDBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +37,13 @@ Global
 		{29441697-06B3-43AD-AD16-67486AD36225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8AECBBC-B271-4554-BC4D-D0C813C36A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF600C22-5F1D-4F3B-9FAB-3A7FCA2CCDBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF600C22-5F1D-4F3B-9FAB-3A7FCA2CCDBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11296C9E-B4B9-4F81-9686-FBCE59B923B2}
 	EndGlobalSection
 EndGlobal
