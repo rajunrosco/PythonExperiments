@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 # Personal Python 3.6 Template
 import getopt
@@ -18,6 +18,7 @@ pdfWriter = PyPDF2.PdfFileWriter()
 
 # Loop through all the PDF files.
 for filename in pdfFiles:
+    print("->Merging: {}".format(filename))
     pdfFileObj = open(filename, 'rb')
     pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
@@ -27,7 +28,12 @@ for filename in pdfFiles:
         pdfWriter.addPage(pageObj)
     pdfFileObj.close()
 
+if os.path.exists('pdfMERGED.pdf'):
+    print("Removing preiously merged pdf")
+    os.remove("pdfMERGED.pdf")
+
 # Save the resulting PDF to a file.
 pdfOutput = open('pdfMERGED.pdf', 'wb')
+print("Writing merged pdf:  pdfMERGED.pdf")
 pdfWriter.write(pdfOutput)
 pdfOutput.close()

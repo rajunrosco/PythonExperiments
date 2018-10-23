@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 # Personal Python 3.6 Template
 import getopt
@@ -160,36 +160,36 @@ def RangeTest():
     ws.title = 'Pi'
     ws['F5'] = 3.14
     named_range = wb.create_named_range("Pi",ws, "F5", 0)
+    
+    #temp = type(named_range)
 
-    temp = type(named_range)
-
-    wb.defined_names.append("myrange")
+    #wb.defined_names.append("myrange")
     #wb.add_named_range(named_range)
 
 
-    myrange = wb.defined_names('myrange')
-    range_dests = myrange.destinations
+    #myrange = wb.defined_names('myrange')
+    #range_dests = myrange.destinations
 
-    redFill = PatternFill(start_color='FFFF0000',end_color='FFFF0000', fill_type='solid')
+    #redFill = PatternFill(start_color='FFFF0000',end_color='FFFF0000', fill_type='solid')
 
-    myrange = ws.defined_range(ws["D1":"F10"])
-    range_dests = myrange.destinations
-    for cell in range_dests:
-        cell.fill = redFill
+    #myrange = ws.defined_range(ws["D1":"F10"])
+    #range_dests = myrange.destinations
+    #for cell in range_dests:
+    #    cell.fill = redFill
 
-    colC = ws['C']
+    #colC = ws['C']
 
    
-    col_range = ws[2:2]
-    for cell in col_range:
-        temp = cell.coordinate
-        cell.fill = redFill
+    #col_range = ws[2:2]
+    #for cell in col_range:
+    #    temp = cell.coordinate
+    #    cell.fill = redFill
 
 
 
-    row10 = ws[10]
-    row_range = ws[5:10]
-
+    #row10 = ws[10]
+    #row_range = ws[5:10]
+    
     wb.save("testrange.xlsx")
     wb.close
 
@@ -205,7 +205,7 @@ def Main(argv):
 
     iStop = 1
 
-    #RangeTest()
+    RangeTest()
 
 
 # If module is executed by name using python.exe, enter script through Main() method.  If it is imported as a module, Main() is never executed at it is used as a library

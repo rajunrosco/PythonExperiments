@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>JSON</Name>
     <RootNamespace>JSON</RootNamespace>
-    <InterpreterId>Global|VisualStudio|PHXPython</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.6</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,10 +25,10 @@
     <Compile Include="JSON.py" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|VisualStudio|PHXPython" />
+    <Content Include="config.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.json" />
+    <InterpreterReference Include="Global|PythonCore|3.6" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
