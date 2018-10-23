@@ -23,6 +23,10 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "JSON", "JSON\JSON.pyproj", 
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "ClassTest", "ClassTest\ClassTest.pyproj", "{E475EB35-673B-4867-B423-0473C894D759}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "pyinstaller_configTEST", "pyinstaller_configTEST\pyinstaller_configTEST.pyproj", "{A4DEC2D6-F493-4C3F-A5DB-7E850ACD452D}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PandasTEST", "PandasTEST\PandasTEST.pyproj", "{0C6FEC39-4A2B-4D86-B538-B99E3C73C480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{68CD355C-15E5-42DD-82C2-0883926EE5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E475EB35-673B-4867-B423-0473C894D759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E475EB35-673B-4867-B423-0473C894D759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4DEC2D6-F493-4C3F-A5DB-7E850ACD452D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4DEC2D6-F493-4C3F-A5DB-7E850ACD452D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C6FEC39-4A2B-4D86-B538-B99E3C73C480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C6FEC39-4A2B-4D86-B538-B99E3C73C480}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

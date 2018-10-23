@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{a4dec2d6-f493-4c3f-a5db-7e850acd452d}</ProjectGuid>
+    <ProjectGuid>{0c6fec39-4a2b-4d86-b538-b99e3c73c480}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>pyconfig.py</StartupFile>
+    <StartupFile>PandasTEST.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -19,8 +19,7 @@
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="pyconfig.py" />
-    <Compile Include="pyexe.py" />
+    <Compile Include="PandasTEST.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
@@ -32,9 +31,6 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X64</Architecture>
     </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="requirements.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>
