@@ -84,6 +84,9 @@ celerybeat-schedule
 venv/
 ENV/
 
+# Visual Studio User prefs (for VS Python projects)
+.vs/
+
 # Spyder project settings
 .spyderproject
 
