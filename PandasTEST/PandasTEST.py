@@ -122,7 +122,48 @@ def FunctionApplicationExample():
 		print(row)
 		print(row.Stat2) # Named Tuple!
 	print()
-	
-SeriesExample()
-DataFrameExample()
-FunctionApplicationExample()
+
+
+def JoinExamples():
+
+    PretendCurrentText = pd.DataFrame( { "key":['key0','key1','key2','key3'], "Text":['Text0','Text1','Text2','Text3']} )
+
+    PretendChangedText = pd.DataFrame( { "key":['key1','key2','key4'], "Updated":['Text1','Text2Changed','Text4']} )
+        # key0 missing
+        # key1 text same
+        # key2 text changed
+        # key3 is new
+
+
+    print(PretendCurrentText)
+    print()
+    print(PretendChangedText)
+    print()
+
+    JoinedText = PretendCurrentText.join(PretendChangedText.set_index("key"), on="key", how="outer")
+    print(JoinedText)
+    print()
+
+    TextChanges = JoinedText['Text'] != JoinedText['Updated'] 
+    #print(TextChanges)
+
+    UpdateNotNull = JoinedText['Updated'].notnull() 
+    #print(UpdateNotNull)
+
+    JoinBools = TextChanges & UpdateNotNull
+    #print(JoinBools)
+
+    #ChangedOnly = JoinedText[ JoinBools ]
+    ChangedOnly = JoinedText[ (JoinedText['Text'] != JoinedText['Updated'])  & ( JoinedText['Updated'].notnull() ) ]
+    print(ChangedOnly)
+    print()
+
+    Updates = JoinedText.query('Text != Updated & Updated.notnull() & Text.notnull()', engine='python')
+    print(Updates)
+
+
+#SeriesExample()
+#DataFrameExample()
+#FunctionApplicationExample()
+
+JoinExamples()
