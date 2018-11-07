@@ -29,6 +29,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PandasTEST", "PandasTEST\Pa
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TaskTests", "TaskTests\TaskTests.pyproj", "{048A84CD-6551-414D-AA60-5E87CA1FF936}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TkinterTEST", "TkinterTEST\TkinterTEST.pyproj", "{6E48BD5A-C868-441C-B216-2BD3594CB98B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,8 @@ Global
 		{0C6FEC39-4A2B-4D86-B538-B99E3C73C480}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{048A84CD-6551-414D-AA60-5E87CA1FF936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{048A84CD-6551-414D-AA60-5E87CA1FF936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E48BD5A-C868-441C-B216-2BD3594CB98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E48BD5A-C868-441C-B216-2BD3594CB98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
