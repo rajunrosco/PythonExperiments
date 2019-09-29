@@ -7,8 +7,8 @@ def ListComprehensionTests():
     # fill a list in one line
     list = [x*2 for x in range(0,10)]
 
-    print("hello")
-
+    print("ListComprehensionTest")
+    print(list)
 
 def DictComprehensionTests():
 
@@ -31,8 +31,9 @@ def DictComprehensionTests():
     # zip function creates zip object of tuples that combine 2 lists
     dictzip2 = zip(keylist, vallist)
 
-    print("hello")    
-
+    print("DictComprehensionTest")
+    [print(x) for x in dictzip2]
+    
 
 def Main(argv):
     
