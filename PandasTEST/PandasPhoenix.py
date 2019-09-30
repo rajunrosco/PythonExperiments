@@ -90,10 +90,13 @@ def FolderPathResults():
 
 
 FolderPathResults()
-sys.exit(0)
 
+# Debug point stops and exits here if checking on data before pandastable is displayed
+#sys.exit(0)
 
+#YeeTable class is based on pandastable Table class
 class YeeTable( Table ):
+    #Override the mouse left button release and add detection and printing of row and column selected
     def handle_left_release(self, event):
         print("Hello left click!")
         print(event)
@@ -109,6 +112,7 @@ class YeeTable( Table ):
 
         self.redraw()
 
+    #Override drawCellEntry to detect if row=1 and col=1 is selected and do not allow editing by not calling super drawCellEntry (not letting user use Cell Entry)
     def drawCellEntry(self, row, col, text=None):
 
         if (row,col) == (1,1):
@@ -121,7 +125,7 @@ class YeeTable( Table ):
             super(YeeTable,self).drawCellEntry(row, col, text)
             return
 
-
+# Create a TKinter app based on Frame
 class TestApp(Frame):
         """Basic test frame for the table"""
         def __init__(self, parent=None):
@@ -138,6 +142,8 @@ class TestApp(Frame):
                                     showtoolbar=False, showstatusbar=True)
 
            # pt.model.df.set_index('identifierName')
+
+            # Cool! bind a control-b input to a function that gets called
             pt.bind("<Control-b>", self.HelloBenson )
             pt.show()
 

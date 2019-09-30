@@ -1,6 +1,9 @@
+ijson==2.5
+matplotlib==3.1.1
+numexpr==2.7.0
 numpy==1.15.3
 pandas==0.23.4
-pip==10.0.1
+pandastable==0.12.1
 python-dateutil==2.7.3
 pytz==2018.5
 setuptools==39.0.1
