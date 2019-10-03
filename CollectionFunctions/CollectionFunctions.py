@@ -5,8 +5,6 @@ from functools import reduce
 def FilterTest():
     keylist = ["a","a|ps4","b","b|ps4","b|win64","c","c|win64"]
 
-    
-
     # filter list with lambda function that returns all strings that contain "ps4"
     # filter() takes a function evaluates to "true", items that you want in the list
     # in the case below, the function is a lambda that takes and argument 'x' and returns
