@@ -27,9 +27,10 @@ if ValidTypes.win64 == "win64":
 NPropertyTuple = collections.namedtuple("NPropertyTuple",['buildid','changelist','artifactpath'])
 CurrentBuildProperties = NPropertyTuple(44474, 34432, 'd:\destinationpath')
 
-print( CurrentBuildProperties[0], CurrentBuildProperties.buildid )
-print( CurrentBuildProperties[1], CurrentBuildProperties.changelist  )
-print( CurrentBuildProperties[2], CurrentBuildProperties.artifactpath )
+# Access namedtuples by index, by named field, or by dictionary hash, or even safer, using the get() dictionary method
+print( CurrentBuildProperties[0], CurrentBuildProperties.buildid, CurrentBuildProperties._asdict()["buildid"], CurrentBuildProperties._asdict().get("buildid") )
+print( CurrentBuildProperties[1], CurrentBuildProperties.changelist, CurrentBuildProperties._asdict()["changelist"], CurrentBuildProperties._asdict().get("changelist")  )
+print( CurrentBuildProperties[2], CurrentBuildProperties.artifactpath, CurrentBuildProperties._asdict()["artifactpath"], CurrentBuildProperties._asdict().get("artifactpath") )
 
 # unpack like a regular tuple
 thisbuildid, thischangelist, thisartifactpath = CurrentBuildProperties
