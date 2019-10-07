@@ -1,4 +1,5 @@
 from tkinter import *
+import TkPassword
 
 BuildsList = [
     ("development","win64development"),
@@ -26,8 +27,9 @@ class MyApp(Tk):
         self.myButton = Button(self, text="PUSH", command=self.myButton_click)
         self.myButton.grid(row=2, column=0)
         self.myButton2 = Button(self, text="PUSH", command=self.myButton2_click)
-        self.myButton2.grid(row=2, column=1)
-
+        self.myButton2.grid(row=2, column=0)
+        self.PasswordButton = Button(self,text="Password", command=self.GetPassword)
+        self.PasswordButton.grid(row=3, column=0)
 
         
         self.mainloop()
@@ -46,5 +48,8 @@ class MyApp(Tk):
 
     def myButton2_click(self):
         print(self.RadioVal.get())
+
+    def GetPassword(self):
+        TkPassword.TkPassword(self)
 
 MyAppObj = MyApp()
