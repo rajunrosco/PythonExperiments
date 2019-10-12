@@ -9,8 +9,11 @@ from tkinter import *
 from tkinter import filedialog, messagebox, simpledialog
 from pandastable import Table, TableModel
 
+
+basepath = os.path.dirname(__file__)
+
 def ProjectLangs():
-    f =  open("ProjectLangs.json",'r')
+    f =  open(basepath+'\\ProjectLangs.json','r')
     objects = ijson.items(f,'datasets.item')
     
 
@@ -37,7 +40,7 @@ def StringResults():
 
     ResultList2DF = []
 
-    with open('StringResult.json','r') as f:
+    with open(basepath+'\\StringResult.json','r') as f:
 
         # Used the json parser to run throught file and print the parsertuples and see structure of JSON
         parser = ijson.parse(f)
@@ -67,7 +70,7 @@ def StringResults():
 def FolderPathResults():
   
     ResultList2DF = []
-    with open("StringFolders.json",'r') as f:
+    with open(basepath+'\\StringFolders.json','r') as f:
 
         #parser = ijson.parse(f)
         #for parsertuple in parser:
@@ -152,6 +155,8 @@ class TestApp(Frame):
         
         def HelloBenson(self, event):
             print("Hello Benson!!!")
+
+
 
 app = TestApp()
 #launch the app
