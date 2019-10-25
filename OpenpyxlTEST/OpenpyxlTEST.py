@@ -9,10 +9,12 @@ import openpyxl as pyxl
 import openpyxl.styles.numbers as Numbers  # the numbers module contains Format definitions
 
 
+ScriptPath = os.path.dirname(sys.argv[0])
+
 def UnicodeTest1():
     print("Execute TEST")
-    if os.path.exists("test.xlm"):
-        wb = pyxl.load_workbook("test.xlsm", keep_vba=True)
+    if os.path.exists(ScriptPath+"/test.xlsm"):
+        wb = pyxl.load_workbook(ScriptPath+"/test.xlsm", keep_vba=True)
     else:
         wb = pyxl.Workbook()
     ws = wb.active
@@ -22,13 +24,13 @@ def UnicodeTest1():
             currentvalue = cell.value
             if(cell.value is not None):
                 coordinate = cell.coordinate
-                if (cell.column == 'B' ) and (cell.row == 2):
+                if (cell.column_letter == 'B' ) and (cell.row == 2):
                     cell.value = u'中国 This is pretty cool'
                     print("[%s] %s -> %s" %(coordinate, currentvalue, cell.value))  
                 else:
                     print("[%s] %s" %(coordinate, currentvalue))
 
-    wb.save("test.xlsm")
+    wb.save(ScriptPath+"/test.xlsm")
 
     print("TEST complete...")
     
@@ -36,13 +38,14 @@ def UnicodeTest2():
     # test insertion of UTF8 character into a cell
     print("execute TEST2")
 
-    wb = pyxl.Workbook()
+    # openpyxl does not seem to be able to create xlsm file but open one and keep the macros
+    wb = pyxl.load_workbook(ScriptPath+"/test2.xlsm", keep_vba=True)
 
     ws = wb.active
 
-    ws['B1'] = '中国'
+    ws['C3'] = '中国'
 
-    wb.save("test2.xlsm")
+    wb.save(ScriptPath+"/test2.xlsm")
 
     print("TEST2 complete...")
 
@@ -61,14 +64,14 @@ def CreateTest3():
     a5.number_format=Numbers.BUILTIN_FORMATS[7]  # Format accounts for negative currancy surrounded by parenthesis
     a5.value = -222
 
-    wb.save('test3.xlsx')
+    wb.save(ScriptPath+"/test3.xlsx")
 
     print("TEST3 complete...")
 
 
 from openpyxl import Workbook, load_workbook, worksheet
 def LoadTest3():
-    wb = load_workbook("test3.xlsx")
+    wb = load_workbook(ScriptPath+"/test3.xlsx")
     ws = wb.active
 
     #worksheet.Worksheet.iter_rows()
@@ -101,16 +104,16 @@ def CreateBigXL():
 		if ((i % 100) == 0):
 			print( repr(i))
 			
-	wb.save("testBIG.xlsx")
+	wb.save(ScriptPath+"/testBIG.xlsx")
 	
 	wb.close()
 	
 #Read big table	
 def ExportBigXL2XML():
-	wb = load_workbook("testBIG.xlsx")
+	wb = load_workbook(ScriptPath+"/testBIG.xlsx")
 	ws = wb.active
 	
-	f = open('testBIG.xml','w')
+	f = open(ScriptPath+"/testBIG.xml",'w')
 	f.write('<Root>\n')
 	
 	for i in range(1,ws.max_row):
@@ -146,7 +149,7 @@ def CellNavigationTest():
 
 
 
-    wb.save("testcell.xlsx")
+    wb.save(ScriptPath+"/testcell.xlsx")
     wb.close()
 
 from openpyxl.styles import Color, PatternFill, Font, Border
@@ -190,7 +193,7 @@ def RangeTest():
     #row10 = ws[10]
     #row_range = ws[5:10]
     
-    wb.save("testrange.xlsx")
+    wb.save(ScriptPath+"/testrange.xlsx")
     wb.close
 
 
@@ -203,8 +206,13 @@ def RangeTest():
 
 def Main(argv):
 
-    iStop = 1
-
+    #UnicodeTest1()
+    #UnicodeTest2()
+    #CreateTest3()
+    #LoadTest3()
+    #CreateBigXL()
+    #ExportBigXL2XML()
+    CellNavigationTest()
     RangeTest()
 
 
