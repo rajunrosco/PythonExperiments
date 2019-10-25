@@ -140,7 +140,13 @@ def JoinExamples():
     print(PretendChangedText)
     print()
 
+    JoinedInner = PretendCurrentText.join(PretendChangedText.set_index("key"), on="key", how="inner")
+    print("Inner Join:")
+    print(JoinedInner)
+    print()
+
     JoinedText = PretendCurrentText.join(PretendChangedText.set_index("key"), on="key", how="outer")
+    print("Outer Join:")
     print(JoinedText)
     print()
 
@@ -161,9 +167,54 @@ def JoinExamples():
     Updates = JoinedText.query('Text != Updated & Updated.notnull() & Text.notnull()', engine='python')
     print(Updates)
 
+from collections import namedtuple, OrderedDict
+def Namedtuple2Dataframe():
+	_Headers = ["identifier","SourceText","stringType"]
+	Tnamedtuple = namedtuple("Tnamedtuple",_Headers)
 
-#SeriesExample()
-#DataFrameExample()
-#FunctionApplicationExample()
+	LocDirect=OrderedDict()
+	LocDirect["key1"]=Tnamedtuple._make(["key1","key1 text","type4"])
+	LocDirect["key2"]=Tnamedtuple._make(["key2","key2 text","type2"])
+	LocDirect["key3"]=Tnamedtuple._make(["key3","key3 text","type3"])
+	LocDirect["key4"]=Tnamedtuple._make(["key4","key4 text","type4"])
 
+	print(LocDirect.values())
+
+	LocDirect_df = pd.DataFrame( list(LocDirect.values()), columns=_Headers, index=LocDirect.keys())
+
+	print(LocDirect_df)
+
+
+	print(LocDirect_df["SourceText"]["key3"])
+
+	print(LocDirect_df.loc["key2"]["stringType"])
+
+	print(LocDirect_df.loc["key2",:])
+
+	print(LocDirect_df.loc['key2','SourceText'])
+
+	dfobject =  LocDirect_df.get('SourceText',default='Not valid!')
+	print(dfobject)
+
+	dfobject = LocDirect_df.at['key4','SourceText']
+	print(dfobject)
+
+	dfobject = LocDirect_df[LocDirect_df.index == 'key2']
+	print(dfobject['SourceText']['key2'])
+
+	dfobject = LocDirect_df[LocDirect_df.index == 'key6']
+	if(dfobject.empty):
+		print("Empty!")
+	else:
+		print(dfobject)
+
+
+
+
+
+Namedtuple2Dataframe()
+
+SeriesExample()
+DataFrameExample()
+FunctionApplicationExample()
 JoinExamples()
