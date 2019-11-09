@@ -1,4 +1,6 @@
 #Hello
+import os
+import sys
 import pandas as pd
 import numpy as np
 
@@ -68,6 +70,137 @@ def DataFrameExample():
 	print(df.values)
 	
 	print()
+
+	TABLE01df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataWithHeader.csv')
+	print(TABLE01df)
+	TABLE01df["Modified"] = pd.to_datetime(TABLE01df.Modified)
+	"""TABLE01df:
+		Key           Text             Modified
+	0  Key1  Text for Key1  01/01/2019 01:11:11
+	1  Key2  Text for Key2  02/02/2019 02:22:22
+	2  Key3  Text for Key3  03/03/2019 03:33:33
+	3  Key4  Text for Key4  04/04/2019 04:44:44
+	"""
+	TABLE02df = TABLE01df.set_index("Key")
+	print(TABLE02df)
+	"""TABLE02df:
+				Text            Modified
+	Key                                    
+	Key1  Text for Key1 2019-01-01 01:11:11
+	Key2  Text for Key2 2019-02-02 02:22:22
+	Key3  Text for Key3 2019-03-03 03:33:33
+	Key4  Text for Key4 2019-04-04 04:44:44
+	"""
+	TABLE03df = TABLE01df.set_index("Key",drop=False)
+	print(TABLE03df)
+	"""TABLE03df:  drop=False option does not drop column after making it the index
+		Key           Text            Modified
+	Key                                          
+	Key1  Key1  Text for Key1 2019-01-01 01:11:11
+	Key2  Key2  Text for Key2 2019-02-02 02:22:22
+	Key3  Key3  Text for Key3 2019-03-03 03:33:33
+	Key4  Key4  Text for Key4 2019-04-04 04:44:44
+	"""
+
+	# Import csv with no header and provide column names, otherwise column names are assumed to be provided by first row
+	TABLE11df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv',header=None,names=["Key","Text","Modified"])
+	print(TABLE11df)
+	"""TABLE11df:
+		Key                    Text             Modified
+	0  Key1  Text for Key1 Modified  01/01/2019 11:11:11
+	1  Key2  Text for Key2 Modified  02/02/2019 22:22:22
+	2  Key5           Text for Key5  05/05/2019 05:55:55
+	3  Key6           Text for Key6  06/06/2019 06:66:66
+	"""
+
+	TABLE12df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv',header=None)
+	print(TABLE12df)
+	"""TABLE12df:  when header=None and names are not specified, column names are just index numbers
+		0                       1                    2
+	0  Key1  Text for Key1 Modified  01/01/2019 11:11:11
+	1  Key2  Text for Key2 Modified  02/02/2019 22:22:22
+	2  Key5           Text for Key5  05/05/2019 05:55:55
+	3  Key6           Text for Key6  06/06/2019 06:66:66
+	"""
+
+	TABLE13df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv',header=None,names=["Key","Text","Modified"],index_col="Key")
+	print(TABLE13df)
+	"""TABLE13df:  Set key on import csv
+							Text             Modified
+	Key                                              
+	Key1  Text for Key1 Modified  01/01/2019 11:11:11
+	Key2  Text for Key2 Modified  02/02/2019 22:22:22
+	Key5           Text for Key5  05/05/2019 05:55:55
+	Key6           Text for Key6  06/06/2019 06:66:66
+	"""
+
+	JOIN01df = TABLE02df.join(TABLE13df, on="Key",how="outer",lsuffix=".a",rsuffix=".b",sort=True)
+	print(JOIN01df)
+	"""JOIN01df:  outer join with suffix
+				Text.a          Modified.a                  Text.b           Modified.b
+	Key                                                                                 
+	Key1  Text for Key1 2019-01-01 01:11:11  Text for Key1 Modified  01/01/2019 11:11:11
+	Key2  Text for Key2 2019-02-02 02:22:22  Text for Key2 Modified  02/02/2019 22:22:22
+	Key3  Text for Key3 2019-03-03 03:33:33                     NaN                  NaN
+	Key4  Text for Key4 2019-04-04 04:44:44                     NaN                  NaN
+	Key5            NaN                 NaT           Text for Key5  05/05/2019 05:55:55
+	Key6            NaN                 NaT           Text for Key6  06/06/2019 06:66:66
+	"""
+
+	JOIN02df = TABLE02df.join(TABLE13df, on="Key",how="inner",lsuffix=".a",rsuffix=".b",sort=True)
+	print(JOIN02df)
+	"""JOIN02df: Inner join like an intersection of both sets
+				Text.a          Modified.a                  Text.b           Modified.b
+	Key                                                                                 
+	Key1  Text for Key1 2019-01-01 01:11:11  Text for Key1 Modified  01/01/2019 11:11:11
+	Key2  Text for Key2 2019-02-02 02:22:22  Text for Key2 Modified  02/02/2019 22:22:22
+	"""
+
+	JOIN03df = TABLE02df.join(TABLE13df, on="Key",how="left",lsuffix=".a",rsuffix=".b",sort=True)
+	print(JOIN03df)
+	"""
+				Text.a          Modified.a                  Text.b           Modified.b
+	Key                                                                                 
+	Key1  Text for Key1 2019-01-01 01:11:11  Text for Key1 Modified  01/01/2019 11:11:11
+	Key2  Text for Key2 2019-02-02 02:22:22  Text for Key2 Modified  02/02/2019 22:22:22
+	Key3  Text for Key3 2019-03-03 03:33:33                     NaN                  NaN
+	Key4  Text for Key4 2019-04-04 04:44:44                     NaN                  NaN
+	"""
+
+	JOIN04df = TABLE02df.join(TABLE13df, on="Key",how="right",lsuffix=".a",rsuffix=".b",sort=True)
+	print(JOIN04df)
+	"""
+				Text.a          Modified.a                  Text.b           Modified.b
+	Key                                                                                 
+	Key1  Text for Key1 2019-01-01 01:11:11  Text for Key1 Modified  01/01/2019 11:11:11
+	Key2  Text for Key2 2019-02-02 02:22:22  Text for Key2 Modified  02/02/2019 22:22:22
+	Key5            NaN                 NaT           Text for Key5  05/05/2019 05:55:55
+	Key6            NaN                 NaT           Text for Key6  06/06/2019 06:66:66
+	"""
+
+	# Select rows where Text.a column is null (Nan)
+	TEMPdf = JOIN01df[ (JOIN01df["Text.a"].isnull())]
+	print(TEMPdf)
+	"""
+			Text.a Modified.a         Text.b           Modified.b
+	Key
+	Key5    NaN        NaT  Text for Key5  05/05/2019 05:55:55
+	Key6    NaN        NaT  Text for Key6  06/06/2019 06:66:66
+	"""
+
+	# Selecting Text.b and Modified.b columns for a subset automatically selects index.
+	TEMPdf = TEMPdf[['Text.b','Modified.b']].copy()
+	print(TEMPdf)
+	"""
+				Text.b           Modified.b
+	Key
+	Key5  Text for Key5  05/05/2019 05:55:55
+	Key6  Text for Key6  06/06/2019 06:66:66
+"""
+
+
+	print()
+
 	
 # pandas function application
 def FunctionApplicationExample():
@@ -213,7 +346,6 @@ def Namedtuple2Dataframe():
 
 
 Namedtuple2Dataframe()
-
 SeriesExample()
 DataFrameExample()
 FunctionApplicationExample()
