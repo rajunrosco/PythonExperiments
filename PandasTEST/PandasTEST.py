@@ -355,46 +355,76 @@ def JoinExamples():
     Updates = JoinedText.query('Text != Updated & Updated.notnull() & Text.notnull()', engine='python')
     print(Updates)
 
+    LEFTdf = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataWithHeader.csv')
+    LEFTdf = LEFTdf.set_index("Key")
+    print(LEFTdf)
+    print()
+    RIGHTdf = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv', usecols=[0,1], names=["identifierName","sourceLanguageText"])
+    RIGHTdf = RIGHTdf.set_index("identifierName")
+    print(RIGHTdf)
+    print()
+
+    JOINdf = LEFTdf.join(RIGHTdf,on="Key", how="inner")
+    print(JOINdf)
+    print()
+
+    COPYdf = LEFTdf.copy()
+    print(COPYdf)
+    print()
+
+    COPYdf = COPYdf.drop(JOINdf.index)
+    print(COPYdf)
+    print()
+
+    MergeLdf = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataWithHeader.csv')
+    print(MergeLdf)
+    MergeRdf = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv', usecols=[0,1], names=["identifierName","sourceLanguageText"])
+    print(MergeRdf)
+
+    MERGEdf = pd.merge(MergeLdf, MergeRdf,left_on="Key",right_on="identifierName")
+    print(MERGEdf)
+    print()
+
 from collections import namedtuple, OrderedDict
 def Namedtuple2Dataframe():
-	_Headers = ["identifier","SourceText","stringType"]
-	Tnamedtuple = namedtuple("Tnamedtuple",_Headers)
+    _Headers = ["identifier","SourceText","stringType"]
+    Tnamedtuple = namedtuple("Tnamedtuple",_Headers)
 
-	LocDirect=OrderedDict()
-	LocDirect["key1"]=Tnamedtuple._make(["key1","key1 text","type4"])
-	LocDirect["key2"]=Tnamedtuple._make(["key2","key2 text","type2"])
-	LocDirect["key3"]=Tnamedtuple._make(["key3","key3 text","type3"])
-	LocDirect["key4"]=Tnamedtuple._make(["key4","key4 text","type4"])
+    LocDirect=OrderedDict()
+    LocDirect["key1"]=Tnamedtuple._make(["key1","key1 text","type4"])
+    LocDirect["key2"]=Tnamedtuple._make(["key2","key2 text","type2"])
+    LocDirect["key3"]=Tnamedtuple._make(["key3","key3 text","type3"])
+    LocDirect["key4"]=Tnamedtuple._make(["key4","key4 text","type4"])
 
-	print(LocDirect.values())
+    print(LocDirect.values())
 
-	LocDirect_df = pd.DataFrame( list(LocDirect.values()), columns=_Headers, index=LocDirect.keys())
+    LocDirect_df = pd.DataFrame( list(LocDirect.values()), columns=_Headers, index=LocDirect.keys())
 
-	print(LocDirect_df)
+    print(LocDirect_df)
 
 
-	print(LocDirect_df["SourceText"]["key3"])
+    print(LocDirect_df["SourceText"]["key3"])
 
-	print(LocDirect_df.loc["key2"]["stringType"])
+    print(LocDirect_df.loc["key2"]["stringType"])
 
-	print(LocDirect_df.loc["key2",:])
+    print(LocDirect_df.loc["key2",:])
 
-	print(LocDirect_df.loc['key2','SourceText'])
+    print(LocDirect_df.loc['key2','SourceText'])
 
-	dfobject =  LocDirect_df.get('SourceText',default='Not valid!')
-	print(dfobject)
+    dfobject =  LocDirect_df.get('SourceText',default='Not valid!')
+    print(dfobject)
 
-	dfobject = LocDirect_df.at['key4','SourceText']
-	print(dfobject)
+    dfobject = LocDirect_df.at['key4','SourceText']
+    print(dfobject)
 
-	dfobject = LocDirect_df[LocDirect_df.index == 'key2']
-	print(dfobject['SourceText']['key2'])
+    dfobject = LocDirect_df[LocDirect_df.index == 'key2']
+    print(dfobject['SourceText']['key2'])
 
-	dfobject = LocDirect_df[LocDirect_df.index == 'key6']
-	if(dfobject.empty):
-		print("Empty!")
-	else:
-		print(dfobject)
+    dfobject = LocDirect_df[LocDirect_df.index == 'key6']
+    if(dfobject.empty):
+        print("Empty!")
+    else:
+        print(dfobject)
 
 
 
