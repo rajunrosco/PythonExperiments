@@ -47,7 +47,11 @@ def DataFrameExample():
 
     data = { 	'Key1':['Text1','Status1'],
                 'Key2':['Text2','Status2'],
-                'Key3':['Text3','Status3'] 
+                'Key3':['Text3','Status3'], 
+                'Key4':['Text4','Text4'], 
+                'Key5':['Status5','Status5'], 
+                'Key6':['Text6','Text6'], 
+                'Key7':['Text7','Text7'], 
             }
     print( list(data.values()) )
     print()
@@ -67,6 +71,11 @@ def DataFrameExample():
     print()
     print( df.loc['Key2']['Text'] )
     print()
+    print( df[ df["Status"].str.startswith("S") & df["Status"].str.endswith("3")]) #Select rows where value in "Status" column begins with "S" and eds with "3'"
+    print( df[ df["Text"].str.contains("Text")] ) #Select all rows where "Text" column contains string "Text"
+    print( df[ df["Text"] == df["Status"]]) #Select all rows where value in "Text" column equals value in "Status" column
+    df["NewColumn"] = df["Status"].str.replace("Status","Text") #create new column with values equal to "Status" column where value with string "Status" is replaced with string "Text"
+    print(df)
 
     print(df.shape)
     print(df.values)
