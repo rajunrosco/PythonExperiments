@@ -7,6 +7,7 @@ numexpr==2.7.0
 numpy==1.15.3
 pandas==0.23.4
 pandastable==0.12.1
+pip==20.0.2
 pyparsing==2.4.2
 python-dateutil==2.7.3
 pytz==2018.5
