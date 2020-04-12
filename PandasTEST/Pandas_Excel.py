@@ -1,0 +1,40 @@
+
+import numpy as np
+import pandas as pd
+import PandasUtil
+
+
+def ReadExcel():
+    df = pd.read_excel("TestDataExcel.xlsx")
+    PandasUtil.printdf("df",df)
+    print(df.info())
+
+    # create index from "Key" column while keeping the original "Key" column.  New index is now also named "Key"
+    df.set_index("Key",drop=False, inplace=True)
+    PandasUtil.printdf("df",df)
+    # rename the index column so that there is no confustion between an index column called "Key" and regular column called "Key"
+    df.index.name = "Index"
+    PandasUtil.printdf("df",df)
+    # This is how you would perform lowercase function on all the index keys
+    df.index = df.index.str.lower()
+    PandasUtil.printdf("df",df)
+
+    # This is how to read and excel file into DataFrame and make values under "Key" header the index of this DataFrame
+    df = pd.read_excel("TestDataExcel.xlsx",index_col="Key")
+    PandasUtil.printdf("df",df)
+
+    # Replace names of columns on import minus column used for index
+    df = pd.read_excel("TestDataExcel.xlsx",index_col="Key",names=["MyText","MyDuration","MyModified"])
+    PandasUtil.printdf("df",df)
+
+    print()
+
+
+
+###################################################################################################################################
+#
+# pandas excel examples
+#
+###################################################################################################################################
+
+ReadExcel()
