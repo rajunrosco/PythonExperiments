@@ -22,7 +22,9 @@ ExampleTable = {
 dfTable = pd.DataFrame(ExampleTable)
 PandasUtil.PrintDF("dfTable",dfTable)
 
-criteria1 = dfTable["Col1"]!=dfTable["Col1_update"] 
+# Example of boolean selection but or'ing multiple criteria to get a boolean series that will mask the rows that we want selected
+
+criteria1 = dfTable["Col1"]!=dfTable["Col1_update"]  # Select rows where value in column "Col1" is not equal to value in column "Col1_update"
 criteria2 = dfTable["Col2"]!=dfTable["Col2_update"] 
 criteria3 = dfTable["Col3"]!=dfTable["Col3_update"] 
 criteria4 = dfTable["Col4"]!=dfTable["Col4_update"] 
