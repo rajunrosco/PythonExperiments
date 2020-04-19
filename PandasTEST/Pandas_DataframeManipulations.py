@@ -16,7 +16,7 @@ def DataFrameExample():
     data = [['Alex',10],['Bob',12],['Clarke',13]]
     # when creating dataframe, define header columns
     df = pd.DataFrame(data,columns=['Name','Age'])
-    PandasUtil.printdf("df",df)
+    PandasUtil.PrintDF("df",df)
 
     # build a dataframe using a dictionary
     data = { 	'Key1':['Text1','Status1'],
@@ -32,7 +32,7 @@ def DataFrameExample():
     print()
     # build dictionary from list of lists, define header columns and make an index of the keys
     df = pd.DataFrame( list(data.values()), columns=['Text','Status'], index=data.keys())
-    PandasUtil.printdf("df",df)
+    PandasUtil.PrintDF("df",df)
 
     print( df['Status'] ) # return the status column as a Pandas Series
     print()
@@ -66,7 +66,7 @@ def DataFrameExample():
     print()
 
     TABLE01df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataWithHeader.csv')
-    PandasUtil.printdf("TABLE01df",TABLE01df)
+    PandasUtil.PrintDF("TABLE01df",TABLE01df)
     TABLE01df["Modified"] = pd.to_datetime(TABLE01df.Modified)
     """TABLE01df:
         Key           Text             Modified
@@ -76,7 +76,7 @@ def DataFrameExample():
     3  Key4  Text for Key4  04/04/2019 04:44:44
     """
     TABLE02df = TABLE01df.set_index("Key")
-    PandasUtil.printdf("TABLE02df",TABLE02df)
+    PandasUtil.PrintDF("TABLE02df",TABLE02df)
     """TABLE02df:
                 Text            Modified
     Key                                    
@@ -86,7 +86,7 @@ def DataFrameExample():
     Key4  Text for Key4 2019-04-04 04:44:44
     """
     TABLE03df = TABLE01df.set_index("Key",drop=False)
-    PandasUtil.printdf("TABLE03df",TABLE03df)
+    PandasUtil.PrintDF("TABLE03df",TABLE03df)
     """TABLE03df:  drop=False option does not drop column after making it the index
         Key           Text            Modified
     Key                                          
@@ -98,7 +98,7 @@ def DataFrameExample():
 
     # Import csv with no header and provide column names, otherwise column names are assumed to be provided by first row
     TABLE11df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv',header=None,names=["Key","Text","Modified"])
-    PandasUtil.printdf("TABLE11df",TABLE11df)
+    PandasUtil.PrintDF("TABLE11df",TABLE11df)
     """TABLE11df:
         Key                    Text             Modified
     0  Key1  Text for Key1 Modified  01/01/2019 11:11:11
@@ -108,7 +108,7 @@ def DataFrameExample():
     """
 
     TABLE12df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv',header=None)
-    PandasUtil.printdf("TABLE12df",TABLE12df)
+    PandasUtil.PrintDF("TABLE12df",TABLE12df)
     """TABLE12df:  when header=None and names are not specified, column names are just index numbers
         0                       1                    2
     0  Key1  Text for Key1 Modified  01/01/2019 11:11:11
@@ -118,7 +118,7 @@ def DataFrameExample():
     """
 
     TABLE13df = pd.read_csv(os.path.dirname(sys.argv[0])+'\\TestDataNoHeader.csv',header=None,names=["Key","Text","Modified"],index_col="Key")
-    PandasUtil.printdf("TABLE13df",TABLE13df)
+    PandasUtil.PrintDF("TABLE13df",TABLE13df)
     """TABLE13df:  Set key on import csv
                             Text             Modified
     Key                                              
@@ -129,7 +129,7 @@ def DataFrameExample():
     """
 
     JOIN01df = TABLE02df.join(TABLE13df, on="Key",how="outer",lsuffix=".a",rsuffix=".b",sort=True)
-    PandasUtil.printdf("JOIN01df",JOIN01df)
+    PandasUtil.PrintDF("JOIN01df",JOIN01df)
     """JOIN01df:  outer join with suffix
                 Text.a          Modified.a                  Text.b           Modified.b
     Key                                                                                 
@@ -142,7 +142,7 @@ def DataFrameExample():
     """
 
     JOIN02df = TABLE02df.join(TABLE13df, on="Key",how="inner",lsuffix=".a",rsuffix=".b",sort=True)
-    PandasUtil.printdf("JOIN02df",JOIN02df)
+    PandasUtil.PrintDF("JOIN02df",JOIN02df)
     """JOIN02df: Inner join like an intersection of both sets
                 Text.a          Modified.a                  Text.b           Modified.b
     Key                                                                                 
@@ -151,7 +151,7 @@ def DataFrameExample():
     """
 
     JOIN03df = TABLE02df.join(TABLE13df, on="Key",how="left",lsuffix=".a",rsuffix=".b",sort=True)
-    PandasUtil.printdf("JOIN03df",JOIN03df)
+    PandasUtil.PrintDF("JOIN03df",JOIN03df)
     """
                 Text.a          Modified.a                  Text.b           Modified.b
     Key                                                                                 
@@ -162,7 +162,7 @@ def DataFrameExample():
     """
 
     JOIN04df = TABLE02df.join(TABLE13df, on="Key",how="right",lsuffix=".a",rsuffix=".b",sort=True)
-    PandasUtil.printdf("JOIN04df",JOIN04df)
+    PandasUtil.PrintDF("JOIN04df",JOIN04df)
     """
                 Text.a          Modified.a                  Text.b           Modified.b
     Key                                                                                 
@@ -174,7 +174,7 @@ def DataFrameExample():
 
     # Select rows where Text.a column is null (Nan)
     TEMPdf = JOIN01df[ (JOIN01df["Text.a"].isnull())]
-    PandasUtil.printdf("TEMPdf",TEMPdf)
+    PandasUtil.PrintDF("TEMPdf",TEMPdf)
     """
             Text.a Modified.a         Text.b           Modified.b
     Key
@@ -184,7 +184,7 @@ def DataFrameExample():
 
     # Selecting Text.b and Modified.b columns for a subset automatically selects index.
     TEMPdf = TEMPdf[['Text.b','Modified.b']].copy()
-    PandasUtil.printdf("TEMPdf",TEMPdf)
+    PandasUtil.PrintDF("TEMPdf",TEMPdf)
     """
                 Text.b           Modified.b
     Key

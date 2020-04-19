@@ -18,7 +18,7 @@ def NamedTuple2Dataframe():
 
     LocDirect_df = pd.DataFrame( list(LocDirect.values()), columns=_Headers, index=LocDirect.keys())
 
-    PandasUtil.printdf("LocDirect_df",LocDirect_df)
+    PandasUtil.PrintDF("LocDirect_df",LocDirect_df)
 
 
     print(LocDirect_df["SourceText"]["key3"])
@@ -30,10 +30,10 @@ def NamedTuple2Dataframe():
     print(LocDirect_df.loc['key2','SourceText'])
 
     dfobject =  LocDirect_df.get('SourceText',default='Not valid!')
-    PandasUtil.printdf("dfobject",dfobject)
+    PandasUtil.PrintDF("dfobject",dfobject)
 
     dfobject = LocDirect_df.at['key4','SourceText']
-    PandasUtil.printdf("dfobject",dfobject)
+    PandasUtil.PrintDF("dfobject",dfobject)
 
     dfobject = LocDirect_df[LocDirect_df.index == 'key2']
     print(dfobject['SourceText']['key2'])
