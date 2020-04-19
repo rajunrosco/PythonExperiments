@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import PandasUtil
 
+count = 0
+
 # pandas function application
 def FunctionApplicationExample():
     print("******************************************************")
@@ -63,8 +65,12 @@ def FunctionApplicationExample():
     Key5  Text5      5     55                                  Strings2/Import/Temp/
     """
 
+    
     # when not using a lambda, assume argument for function is current row when apply iterates the column
-    def FolderPath2( dfrow):
+    def FolderPath2( dfrow ):
+        global count
+        count = count + 1
+        print("Inside Counter: {}".format(count))
         if len(dfrow.Option):
             return "Strings2/Text/{}/".format(dfrow.Option)
         else:
@@ -73,6 +79,7 @@ def FunctionApplicationExample():
             else:
                 return "Strings2/Import/Temp/"
 
+    count = 0
     df1['folderPath'] = df1.apply(FolderPath2, axis='columns' )
     PandasUtil.PrintDF("df1",df1)
 

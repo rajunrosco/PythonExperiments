@@ -5,16 +5,16 @@ import numpy as np
 
 
 
-def printdf(label, dataframe):
+def PrintDF(label, dataframe):
     print("[Dataframe] "+label+":\n", dataframe)
     print()
 
 
 dfLocDirect = pd.read_csv('RecordingStatusLocdirect.csv')
-PandasUtil.printdf("dfLocDirect",dfLocDirect)
+PandasUtil.PrintDF("dfLocDirect",dfLocDirect)
 
 dfUpdate = pd.read_csv('RecordingStatusUpdate.csv')
-PandasUtil.printdf("dfUpdate",dfUpdate)
+PandasUtil.PrintDF("dfUpdate",dfUpdate)
 
 # Create a new column 'RecordingStatus' that looks at 'common' and 'en-us' columns to determine value
 dfUpdate["RecordingStatus"] = np.where(dfUpdate['en-us'].isnull(), np.where(dfUpdate['common'].isnull(),"Not Recorded",dfUpdate['common']), dfUpdate['en-us'])
@@ -39,20 +39,20 @@ dfUpdate['path2'] = dfUpdate.apply( UpdateCurrentRow_RecordingStatus, axis='colu
 
 
 
-PandasUtil.printdf("dfUpdate",dfUpdate)
+PandasUtil.PrintDF("dfUpdate",dfUpdate)
 
 
 
 
 dfLocDirect.set_index('identifierName', drop=False, inplace=True)
-PandasUtil.printdf("dfLocDirect",dfLocDirect)
+PandasUtil.PrintDF("dfLocDirect",dfLocDirect)
 dfUpdate.set_index('identifierName', drop=False, inplace=True)
-PandasUtil.printdf("dfUpdate",dfUpdate)
+PandasUtil.PrintDF("dfUpdate",dfUpdate)
 JoinedRecordingStatus = dfLocDirect.join(dfUpdate, on="identifierName", how="outer", rsuffix="_update")
-PandasUtil.printdf("JoinedRecordingStatus",JoinedRecordingStatus)
+PandasUtil.PrintDF("JoinedRecordingStatus",JoinedRecordingStatus)
 
 JoinedRecordingStatus = JoinedRecordingStatus[JoinedRecordingStatus['RecordingStatus']!=JoinedRecordingStatus['RecordingStatus_update']]
-PandasUtil.printdf("JoinedRecordingStatus",JoinedRecordingStatus)
+PandasUtil.PrintDF("JoinedRecordingStatus",JoinedRecordingStatus)
 
 print(JoinedRecordingStatus[["RecordingStatus_update","path"]].to_csv("RecordingStatusImportUpdate.csv", header=['RecordingStatus','P4Path']))
 
