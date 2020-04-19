@@ -54,7 +54,7 @@ def Dataframe2XL( SourceDataframe ):
             wb.Save()
 
 
-def printdf(label, dataframe):
+def PrintDF(label, dataframe):
     print("[Dataframe] "+label+":\n", dataframe)
     print()
 
@@ -72,7 +72,7 @@ def printdf(label, dataframe):
 def main():
 
     df = pd.read_csv('TestDataWithHeader.csv')
-    printdf("df",df)
+    PrintDF("df",df)
     Dataframe2XL(df)
     df["Path"]="MyNewPath"
 

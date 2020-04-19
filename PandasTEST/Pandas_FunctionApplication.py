@@ -17,7 +17,7 @@ def FunctionApplicationExample():
                 }
                 
     df = pd.DataFrame( list(data.values()), columns=['Text','Stat1','Stat2','Path','Option'], index=data.keys())
-    PandasUtil.printdf("df",df)
+    PandasUtil.PrintDF("df",df)
     """
            Text  Stat1  Stat2           Path       Option
     Key1  Text1      1     11  Strings/Text/       Import
@@ -31,7 +31,7 @@ def FunctionApplicationExample():
 
     #Replace NaN and None with "" (empty string) in the 'Path' and 'Option' column
     df1[['Path','Option']] = df1[['Path','Option']].replace(to_replace=np.nan, value='')
-    PandasUtil.printdf("df1",df1)
+    PandasUtil.PrintDF("df1",df1)
     """
            Text  Stat1  Stat2           Path       Option
     Key1  Text1      1     11  Strings/Text/       Import
@@ -53,7 +53,7 @@ def FunctionApplicationExample():
 
     # Add folderPath column that is calculated by FolderPath() lambda above
     df1['folderPath'] = df1.apply( lambda x: FolderPath(x.Path, x.Option), axis='columns')
-    PandasUtil.printdf("df1",df1)
+    PandasUtil.PrintDF("df1",df1)
     """
            Text  Stat1  Stat2           Path       Option                 folderPath
     Key1  Text1      1     11  Strings/Text/       Import       Strings/Text/Import/
@@ -74,7 +74,7 @@ def FunctionApplicationExample():
                 return "Strings2/Import/Temp/"
 
     df1['folderPath'] = df1.apply(FolderPath2, axis='columns' )
-    PandasUtil.printdf("df1",df1)
+    PandasUtil.PrintDF("df1",df1)
 
     def adder( e1, e2):
         return e1 + e2   # looks like e1 represents element in Dataframe and all params after are extra
@@ -85,7 +85,7 @@ def FunctionApplicationExample():
     print(df1[['Stat1','Stat2']].pipe( lambda x: x*2)) # multiply every element in table by 2
     print()
     df1['Stat1']=df1['Stat1'].pipe( lambda x: x*100)
-    PandasUtil.printdf("df1",df1)
+    PandasUtil.PrintDF("df1",df1)
 
 
     print(df1[['Stat1','Stat2']].apply(lambda x: sum(x)*100))  # apply() by default takes entire column as list argument
