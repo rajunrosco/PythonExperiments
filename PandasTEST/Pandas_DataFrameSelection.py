@@ -22,6 +22,20 @@ ExampleTable = {
 dfTable = pd.DataFrame(ExampleTable)
 PandasUtil.PrintDF("dfTable",dfTable)
 
+# Create new columns with values from original columns typed to string.
+dfTable["ColA"] = dfTable["Col1"].astype(str)
+dfTable["ColB"] = dfTable["Col1_update"].astype(str)
+
+# Create new column named "Status" and fill with string "Changed"
+dfTable = dfTable.assign(Status="Changed")
+
+statuscriteria = dfTable["Col2_update"] > 2
+
+dfTable.loc[ statuscriteria , ['Status']] = dfTable[statuscriteria]['Status']+" Update"
+
+dfTest = dfTable[ (dfTable["ColB"]=='3') & (dfTable['ColA'] == '1')]
+
+
 # Example of boolean selection but or'ing multiple criteria to get a boolean series that will mask the rows that we want selected
 
 criteria1 = dfTable["Col1"]!=dfTable["Col1_update"]  # Select rows where value in column "Col1" is not equal to value in column "Col1_update"
