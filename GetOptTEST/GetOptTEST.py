@@ -37,11 +37,11 @@ def Main(argv):
     except getopt.GetoptError as err:
         print (str(err))
         print_usage()
-        sys.exit(2)
+        sys.exit(1)
     except:
         print("Unexpected error:", sys.exc_info()[0])
         print_usage()
-        sys.exit(2)
+        sys.exit(1)
 
     # Example:  python.exe PythonTemplate.py --test1 --test2=test2val file1 file2
     # Result:
