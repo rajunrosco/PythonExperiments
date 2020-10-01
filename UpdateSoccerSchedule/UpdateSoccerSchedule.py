@@ -89,9 +89,13 @@ def print_usage():
     """
 
     print("")
-    print("UpdateSoccerSchedule <OPTIONS>")
+    print("UpdateSoccerSchedule <OPTIONS> <ARG>")
+    print("")
+    print("<ARG> - Optional argument is the ScheduleNickname in the UpdateSoccerScheduleConfig.xlsx file")
     print("")
     print("  {: <15} {: >10}".format(*['-h, -?, --help','Displays this help output']))
+    print("  {: <15} {: >10}".format(*['--testmail','Sends a test MMS message to env user']))
+    print("  {: <15} {: >10}".format(*['--sendwelcome','Sends welcome MMS message to all users in ScheduleNickname']))
 
 
 ######################################################################################################################################################################
@@ -131,20 +135,22 @@ def Main(argv):
     server =  smtplib.SMTP_SSL("smtp.gmail.com", port, context=context)
     server.login(sender_email, password)
 
-    if len(args) != 1:
-        print("[Error] 1 argument only") 
-        sys.exit(1)
-    else:
-        ScheduleParam = args[0]
-
     for opt, val in opts:
         if opt == '--testmail':
             receiver_email = os.environ.get("GMAILBOT_TO")
-            TEXTMESSAGE = TEXTMESSAGE.format("Girls 14U Division 1","2:00 PM", "September 18, 2020", "Legacy Events Center", "2:00 PM", "September 18, 2020",  "Legacy Events Center",)
+            TEXTMESSAGE = TEXTMESSAGE.format("Girls 14U Division 1 TEST","2:00 PM", "September 18, 2020", "Legacy Events Center", "2:00 PM", "September 18, 2020",  "Legacy Events Center",)
+            print("[Log] Sending TEST MMS to: {}".format(receiver_email))
             server.sendmail(sender_email, receiver_email, TEXTMESSAGE)
+            print("[Log] Script complete.")
             sys.exit(0)
 
         if opt == '--sendwelcome':
+            if len(args) != 1:
+                print("[Error] Argument missing: ScheduleNickname") 
+                sys.exit(1)
+            else:
+                ScheduleParam = args[0]
+
             print("[Log] Loading soccer schedule configeration file: {}".format(SCHEDULECONFIGFILE))
             if not os.path.isfile(SCHEDULECONFIGFILE):
                 print("[Error] Cannot find soccer schedule configeration file: {}".format(SCHEDULECONFIGFILE))
@@ -167,6 +173,11 @@ def Main(argv):
             print("[Log] Script Complete")
             sys.exit(0)
 
+    if len(args) != 1:
+        print("[Error] Argument missing: ScheduleNickname") 
+        sys.exit(1)
+    else:
+        ScheduleParam = args[0]
 
     ###############################################################################################################################
     # Load Configuration File

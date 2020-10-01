@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "UpdateSoccerSchedule.py",
+            "type": "python",
+            "request": "launch",
+            "program": "UpdateSoccerSchedule.py",
+            "console": "integratedTerminal",
+        },
+        {
             "name": "UpdateSoccerSchedule.py --testmail",
             "type": "python",
             "request": "launch",

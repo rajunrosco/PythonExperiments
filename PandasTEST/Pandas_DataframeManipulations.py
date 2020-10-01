@@ -23,9 +23,9 @@ def DataFrameExample():
                 'Key2':['Text2','Status2'],
                 'Key3':['Text3','Status3'], 
                 'Key4':['Text4','Text4'], 
-                'Key5':['Status5','Status5'], 
+                'Key5-f':['Status5','Status5'], 
                 'Key6':['Text6','Text6'], 
-                'Key7':['Text7','Text7'], 
+                'Key7-f':['Text7','Text7'], 
             }
     # dictionary becomes a list of lists
     print( list(data.values()) )
@@ -33,6 +33,12 @@ def DataFrameExample():
     # build dictionary from list of lists, define header columns and make an index of the keys
     df = pd.DataFrame( list(data.values()), columns=['Text','Status'], index=data.keys())
     PandasUtil.PrintDF("df",df)
+
+    df["NewColumn"] = "Not Recorded"
+
+    dfFemale = df[df.index.str.endswith('-f')]
+
+    df["NewColumn"] = np.where( df.index.str.endswith('-f'), "LocOnly", df["NewColumn"])
 
     print( df['Status'] ) # return the status column as a Pandas Series
     print()
