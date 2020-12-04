@@ -9,12 +9,6 @@ import smtplib
 #pip install sendgrid
 from sendgrid.helpers.mail import *
 
-# Here are the email package modules we'll need
-from email import encoders
-from email.mime.base import MIMEBase
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-
 TEST_MESSAGE='''
 Dear valued stockist,<br>
 <br>
@@ -127,4 +121,5 @@ try:
     print(response.body)
     print(response.headers)
 except Exception as e:
-    print(e.message)
+    istop = 1
+    print(e)
