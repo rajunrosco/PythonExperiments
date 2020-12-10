@@ -23,9 +23,28 @@ for currenttype in ValidTypes:
 if ValidTypes.win64 == "win64":
     print("win64 found!")
 
-
+# named tuple defined with (typename, fields)
 NPropertyTuple = collections.namedtuple("NPropertyTuple",['buildid','changelist','artifactpath'])
+
+# Beginning with Python 3.7, you can define defaults when an empty NamedTuple is created
+# NPropertyTuple = collections.namedtuple("NPropertyTuple",['buildid','changelist','artifactpath'], defaults=["buildid_DEFAULT","changelist_DEFAULT","artifactpath_DEFAULT"])
 CurrentBuildProperties = NPropertyTuple(44474, 34432, 'd:\destinationpath')
+
+# value of the namedtuple
+print( CurrentBuildProperties)
+
+# value of namedtuple returned as a list
+print( list(CurrentBuildProperties) )
+
+# This is how you would change the value of a NamedTuple.  Since NamedTuple is immutable (like Tuple), the _replace() method can generate a new tuple for you to replace original variable
+NewNampedTuple = CurrentBuildProperties._replace(buildid=6969, artifactpath="d:\newdestinationpath")
+CurrentBuildProperties = NewNampedTuple
+
+# Use list comprehension to return an list of tuples that contain both index and name of fields
+fieldlistenum = [ (x,y) for x,y in enumerate(CurrentBuildProperties._fields)]
+
+# use dictionary comprehension to return lookup of field to index
+fieldidxlookup = { y:x for x,y in enumerate(CurrentBuildProperties._fields)}
 
 # Access namedtuples by index, by named field, or by dictionary hash, or even safer, using the get() dictionary method
 print( CurrentBuildProperties[0], CurrentBuildProperties.buildid, CurrentBuildProperties._asdict()["buildid"], CurrentBuildProperties._asdict().get("buildid") )
