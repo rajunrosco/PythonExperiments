@@ -58,3 +58,52 @@ print( len(CurrentBuildProperties) )  # 3
 
 print( CurrentBuildProperties._fields )
 # outputs a tuple -> ('buildid', 'changelist', 'artifactpath')
+
+
+Header = [  ("Key",20,True),
+            ("Path",20,True),
+            ("Text",200,True),
+            ("Status",20,False),
+            ("Comment",200,True)
+        ]
+
+import openpyxl
+class HeaderInfoClass:
+    _NHeaderInfo = collections.namedtuple("NHeaderInfo",["Name","index","colidx","colstr","width","locked"])
+    _dict={}
+    def __init__(self):
+        
+        for i, (keyname, width, lock) in enumerate(Header):
+            self._dict[keyname] = self._NHeaderInfo(keyname,i, i+1, openpyxl.utils.cell.get_column_letter(i+1),width,lock)
+    
+    def get(self, inkey):
+        if type(inkey)==str:
+            return self._dict.get(inkey)
+
+        elif type(inkey)==int:
+            for key, info in self._dict.items():
+                if info.index == inkey:
+                    return info
+            return None
+        else:
+            return None
+
+    def as_list(self):
+        return self._NHeaderInfo._fields
+
+    def as_strlist(self):
+        return ",".join(self._NHeaderInfo._fields)
+
+    
+       
+
+HeaderInfo = HeaderInfoClass()
+
+
+istop=1
+
+
+
+
+
+

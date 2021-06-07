@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import sys
 
-import PandasUtil
+#import PandasUtil
 
 ExampleTable = {
     "idx":          [1,2,3,4,5,6,7,8,9,10],
@@ -16,11 +16,13 @@ ExampleTable = {
     "Col2_update":  [2,2,3,3,2,2,2,2,2,2],
     "Col3_update":  [3,3,3,3,3,3,3,3,3,3],
     "Col4_update":  [4,4,4,4,4,4,4,4,4,4],
-    "Col5_update":  [5,5,5,5,5,5,5,4,5,5]
+    "Col5_update":  [5,5,5,5,5,5,5,4,5,5],
+    "SCamel":["StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg/TEXT","StRiNg10/TEXT"],
+    "SUpper":["STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","STRING","StRiNg10"]
 }
 
 dfTable = pd.DataFrame(ExampleTable)
-PandasUtil.PrintDF("dfTable",dfTable)
+#PandasUtil.PrintDF("dfTable",dfTable)
 
 # Create new columns with values from original columns typed to string.
 dfTable["ColA"] = dfTable["Col1"].astype(str)
@@ -49,8 +51,13 @@ criteria = criteria1 | criteria2 | criteria3 | criteria4 | criteria5
 
 dfChanges = dfTable[ criteria ]
 
+dfTable["SUpperTEXT"] = dfTable["SUpper"].str.lower()+"/TEXT"
 
-PandasUtil.PrintDF("dfChanges",dfChanges)
+stringcriteria = dfTable["SCamel"].str.lower()==(dfTable["SUpper"]+"/TEXT").str.lower()
+dfStringChanges = dfTable[ stringcriteria ].copy()
+
+
+#PandasUtil.PrintDF("dfChanges",dfChanges)
 
 
 istop =1

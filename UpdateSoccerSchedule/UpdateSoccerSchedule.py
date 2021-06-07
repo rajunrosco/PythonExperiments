@@ -10,7 +10,8 @@ import sys
 
 
 MODULEROOT = os.path.dirname(os.path.realpath(__file__))
-SCHEDULECONFIGFILE = MODULEROOT+"\\UpdateSoccerScheduleConfig.xlsx"
+SCHEDULE_JSON_CONFIGFILE = MODULEROOT+"\\UpdateSoccerScheduleConfig.json"
+SIMULATEFLAG = False
 TEXTMESSAGE = """\
 Subject: [EVENT UPDATE] {0}
 
@@ -38,9 +39,9 @@ event change happens for:
 
 def LoadConfig(): # Returns a DataFrame.  If empty, can be tested with DataFrame.empty
     global SCHEDULECONFIGFILE
-    dfConfig = pd.read_excel(SCHEDULECONFIGFILE)
-    dfConfig.set_index("ScheduleNickname", inplace=True)
-    return dfConfig
+    dfJSONConfig = pd.read_json(SCHEDULE_JSON_CONFIGFILE, orient='records')
+    dfJSONConfig.set_index("ScheduleNickname", inplace=True)
+    return dfJSONConfig
 
 
 def LoadWebSchedule( url , teamname):  #load the webschedule only for our teamname
@@ -96,6 +97,7 @@ def print_usage():
     print("  {: <15} {: >10}".format(*['-h, -?, --help','Displays this help output']))
     print("  {: <15} {: >10}".format(*['--testmail','Sends a test MMS message to env user']))
     print("  {: <15} {: >10}".format(*['--sendwelcome','Sends welcome MMS message to all users in ScheduleNickname']))
+    print("  {: <15} {: >10}".format(*['--simulate','runs script without sending MMS messages']))
 
 
 ######################################################################################################################################################################
@@ -107,6 +109,7 @@ def print_usage():
 
 def Main(argv):
     global TEXTMESSAGE
+    global SIMULATEFLAG
     global SCHEDULECONFIGFILE
 
     try:
@@ -114,7 +117,8 @@ def Main(argv):
                                     '?h',                # each character represents a sort option -?, -H
                                     ['help',
                                     'testmail',
-                                    'sendwelcome']      # each list entry represents a long option --help, etc.
+                                    'sendwelcome',
+                                    'simulate']      # each list entry represents a long option --help, etc.
                                     )
     except getopt.GetoptError as err:
         print (str(err))
@@ -151,9 +155,9 @@ def Main(argv):
             else:
                 ScheduleParam = args[0]
 
-            print("[Log] Loading soccer schedule configeration file: {}".format(SCHEDULECONFIGFILE))
-            if not os.path.isfile(SCHEDULECONFIGFILE):
-                print("[Error] Cannot find soccer schedule configeration file: {}".format(SCHEDULECONFIGFILE))
+            print("[Log] Loading soccer schedule configeration file: {}".format(SCHEDULE_JSON_CONFIGFILE))
+            if not os.path.isfile(SCHEDULE_JSON_CONFIGFILE):
+                print("[Error] Cannot find soccer schedule configeration file: {}".format(SCHEDULE_JSON_CONFIGFILE))
                 sys.exit(1)
 
             dfConfig = LoadConfig()
@@ -172,6 +176,9 @@ def Main(argv):
 
             print("[Log] Script Complete")
             sys.exit(0)
+        if opt == "--simulate":
+            print("[Warning] SIMULATE mode active")
+            SIMULATEFLAG = True
 
     if len(args) != 1:
         print("[Error] Argument missing: ScheduleNickname") 
@@ -181,9 +188,9 @@ def Main(argv):
 
     ###############################################################################################################################
     # Load Configuration File
-    print("[Log] Loading soccer schedule configeration file: {}".format(SCHEDULECONFIGFILE))
-    if not os.path.isfile(SCHEDULECONFIGFILE):
-        print("[Error] Cannot find soccer schedule configeration file: {}".format(SCHEDULECONFIGFILE))
+    print("[Log] Loading soccer schedule configeration file: {}".format(SCHEDULE_JSON_CONFIGFILE))
+    if not os.path.isfile(SCHEDULE_JSON_CONFIGFILE):
+        print("[Error] Cannot find soccer schedule configeration file: {}".format(SCHEDULE_JSON_CONFIGFILE))
         sys.exit(1)
 
     dfConfig = LoadConfig()
@@ -197,14 +204,21 @@ def Main(argv):
     
     ###############################################################################################################################
     # Get the current schedule for ScheduleParam
+    dfCurrentSchedule = None
     CurrentSoccerScheduleFile = "./{}.csv".format(ScheduleParam)
     print("[Log] Loading current schedule: {}".format(CurrentSoccerScheduleFile))
     if not os.path.isfile(CurrentSoccerScheduleFile):
-        print("[Error] Cannot find current soccer schedule: {}".format(CurrentSoccerScheduleFile))
-        sys.exit(1)
-    
-    dfCurrentSchedule = pd.read_csv(CurrentSoccerScheduleFile, dtype=str)
-    dfCurrentSchedule.set_index("Game", inplace=True)
+        print("[Warning] Cannot find current soccer schedule: {}".format(CurrentSoccerScheduleFile))
+        ScheduleName = dfScheduleConfig.loc[ScheduleParam,"ScheduleName"]
+        print("[Warning] Query web to initialize current schedule: {}".format( ScheduleName))
+        dfCurrentSchedule = LoadWebSchedule( dfScheduleConfig.loc[ScheduleParam,"ScheduleURL"], dfScheduleConfig.loc[ScheduleParam,"TeamName"] )
+        if dfCurrentSchedule.empty:
+            print("[ERROR] Web Schedule not found for: {}".format( ScheduleName))
+            sys.exit(1)
+        dfCurrentSchedule.to_csv(CurrentSoccerScheduleFile, quoting=csv.QUOTE_NONNUMERIC)
+    else:
+        dfCurrentSchedule = pd.read_csv(CurrentSoccerScheduleFile, dtype=str)
+        dfCurrentSchedule.set_index("Game", inplace=True)
 
 
     ###############################################################################################################################
@@ -244,11 +258,13 @@ def Main(argv):
             print("[Log]     New: {} {} @{}".format(datenew_obj.date().strftime('%A, %m-%d-%Y'),timenew,venuenew))
             print("[Log]     Old: {} {} @{}".format(dateold_obj.date().strftime('%A, %m-%d-%Y'),timeold,venueold))
             
-
-            currentmessage = TEXTMESSAGE.format(ScheduleName, timenew, datenew_obj.date().strftime('%m-%d-%Y'), venuenew, timeold, dateold_obj.date().strftime('%m-%d-%Y'), venueold)
-            for currentrecipient in MailingList:
-                print("[Log] sending update email to: {}".format(currentrecipient))
-                server.sendmail(sender_email, currentrecipient, currentmessage)
+            if(SIMULATEFLAG):
+                print("[Warning] Simulate mode activated.  No MMS update messages sent.")
+            else:
+                currentmessage = TEXTMESSAGE.format(ScheduleName, timenew, datenew_obj.date().strftime('%m-%d-%Y'), venuenew, timeold, dateold_obj.date().strftime('%m-%d-%Y'), venueold)
+                for currentrecipient in MailingList:
+                    print("[Log] sending update email to: {}".format(currentrecipient))
+                    server.sendmail(sender_email, currentrecipient, currentmessage)
 
     print("[Log] Script complete.")    
 

@@ -20,13 +20,29 @@
             "args":["--testmail"]
         },
         {
-            "name": "UpdateSoccerSchedule.py KiriLeague",
+            "name": "UpdateSoccerSchedule.py 2021Spring_14U_Division1",
             "type": "python",
             "request": "launch",
             "program": "UpdateSoccerSchedule.py",
             "console": "integratedTerminal",
-            "args": ["KiriLeague"]
-        }
+            "args": ["2021Spring_14U_Division1"]
+        },
+        {
+            "name": "UpdateSoccerSchedule.py 2021Spring_14U_Division1 SIMULATE",
+            "type": "python",
+            "request": "launch",
+            "program": "UpdateSoccerSchedule.py",
+            "console": "integratedTerminal",
+            "args": ["--simulate","2021Spring_14U_Division1"]
+        },
+        {
+            "name": "UpdateSoccerSchedule.py 2021Spring_15U_Division2",
+            "type": "python",
+            "request": "launch",
+            "program": "UpdateSoccerSchedule.py",
+            "console": "integratedTerminal",
+            "args": ["2021Spring_15U_Division2"]
+        },
         {
             "name": "UpdateSoccerSchedule.py --sendwelcome KiriLeague",
             "type": "python",
