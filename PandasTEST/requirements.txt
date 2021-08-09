@@ -16,7 +16,7 @@ pylint==2.4.4
 pyparsing==2.4.2
 python-dateutil==2.7.3
 pytz==2018.5
-pywin32==227
+pywin32==301
 six==1.11.0
 typed-ast==1.4.1
 wrapt==1.11.2
