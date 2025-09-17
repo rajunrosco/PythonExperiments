@@ -59,6 +59,30 @@ print( len(CurrentBuildProperties) )  # 3
 print( CurrentBuildProperties._fields )
 # outputs a tuple -> ('buildid', 'changelist', 'artifactpath')
 
+########################################################################################################
+# Alternative typing.NamedTuple if type hints are needed
+import typing
+import datetime
+
+class PersonInfo(typing.NamedTuple):
+    name: str 
+    sex: str
+    dob: datetime.date
+
+class PetInfo(typing.NamedTuple):
+    name: str
+    sex: str
+    dob: datetime.date
+
+Benson:PersonInfo = PersonInfo("Benson Yee","M",datetime.date(1970,1,26))
+print( Benson.dob )
+for idx, field in enumerate(PersonInfo._fields):
+    print(idx, field)
+
+print( isinstance(Benson, PetInfo) )
+print( isinstance(Benson, PersonInfo) )
+
+ 
 
 Header = [  ("Key",20,True),
             ("Path",20,True),
