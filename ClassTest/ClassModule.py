@@ -2,8 +2,14 @@ import os
 import sys
 import datetime
 import typing  #used for type hints especially for user defined classes
+from dataclasses import dataclass
 
-
+#dataclass decorator automagically creates class with default __init__, __repr__, and __eq__ 
+@dataclass          
+class YeeDataClass:
+    Name: str
+    Age: int
+    Weight: int
 
 class YeeBaseClass():
     _ClassVar = 0
@@ -11,18 +17,18 @@ class YeeBaseClass():
         self._BVar1 = None
         self._BVar2 = {}
 
-        self._property1 = 666  # property with only getter method
+        self._property1 = 666  # read-only property only has getter method, setting value creates error
         self._property2 = 0  # property with setter and getter method
 
-    @property
+    @property #implies the getter method for property1
     def property1(self):
         return self._property1
     
-    @property
+    @property #implies the getter method for property2
     def property2(self):
         return self._property2
     
-    @property2.setter
+    @property2.setter #setter method for property2
     def property2(self, value):
         self._property2 = value
         
