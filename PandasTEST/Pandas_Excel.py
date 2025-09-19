@@ -1,8 +1,13 @@
 
 import numpy as np
+import os
 import pandas as pd
+import pathlib
 import PandasUtil
 
+_MODULEPATH = pathlib.Path(__file__).parent
+
+os.chdir(_MODULEPATH)
 
 def ReadExcel():
     df = pd.read_excel("TestDataExcel.xlsx")

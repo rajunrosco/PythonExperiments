@@ -5,16 +5,17 @@ Use as first module to import for Pandas Experiments
 
 import os
 import numpy as np
+import pathlib
 import pandas as pd
 import sys
 
 #install pywin32 python libs in order to launch Excel from win com object
 import pythoncom
-import win32api
 import win32com.client
 
 from win32com.client import Dispatch
 
+_MODULEPATH = pathlib.Path(__file__).parent
 
 # NEAT! Use this method in Debug Console to open and copy Dataframe to Excel for Debugging!
 def Dataframe2XL( SourceDataframe ):
@@ -84,7 +85,7 @@ def PrintDF(label, SourceDataframe):
 ###################################################################################################################################################################################################
 def main():
 
-    df = pd.read_csv('TestDataWithHeader.csv')
+    df = pd.read_csv(( _MODULEPATH/'TestDataWithHeader.csv').resolve() )
     PrintDF("df",df)
 
     lotsofdata = { i : [i*j for j in range(1,100)] for i in range(1,5)}
