@@ -2,6 +2,66 @@
 # namedtuple is part of collections
 import collections
 
+########################################################################################################
+# Alternative typing.NamedTuple if type hints are needed
+import typing
+import datetime
+
+class creditcard(typing.NamedTuple):
+    nameoncard: str
+    ccnum: int
+    cvv: int
+
+class PersonInfo(typing.NamedTuple):
+    name: str 
+    sex: str
+    dob: datetime.date
+    nicknames: list[str]
+    creditcards: dict[str,creditcard]
+
+class PetInfo(typing.NamedTuple):
+    name: str
+    sex: str
+    dob: datetime.date
+
+Benson:PersonInfo = PersonInfo("Benson Yee","M",datetime.date(1970,1,26),["YeePrime","Rosco"],{"Visa":creditcard("Benson H Yee",1111,111),"AMEX":creditcard("Benson Yee",2222,222)})
+print( Benson.dob )
+for idx, field in enumerate(PersonInfo._fields):
+    print(idx, field)
+
+print( isinstance(Benson, PetInfo) )
+print( isinstance(Benson, PersonInfo) )
+
+########################################################################################################
+# Len and generic tuples
+mytuple0 = tuple([])  #create an empty tuple
+print(f"mytuple0 = {mytuple0}")
+print(f"len(mytuple0) = {len(mytuple0)}")
+mytuple1 = tuple(["benson"])
+print(f"mytuple1 = {mytuple1}  <-- Notice how single element tuple contains a comma")
+print(f"len(mytuple1) = {len(mytuple1)}")
+mytuple2 = tuple(["benson","cleon"])
+print(f"mytuple2 = {mytuple2}")
+print(f"len(mytuple2) = {len(mytuple2)}")
+
+
+
+
+########################################################################################################
+# Dataclasses
+# https://www.datacamp.com/tutorial/python-data-classes
+import dataclasses
+
+
+DataClassPetInfo_struct = [("name",str),("sex",str),("dob",datetime.date)]
+
+DataClassPetInfo = dataclasses.make_dataclass("DataClassPetInfo",DataClassPetInfo_struct)
+
+mypet = DataClassPetInfo("Copper","M",datetime.date(2000,1,1))
+
+
+########################################################################################################
+
 _ValidTypes = ['win64', 'ps4', 'xboxone', 'switch']
 # create a namedtuple called TValidTypes with tuple element names from the _ValidTypes list
 TValidTypes = collections.namedtuple("TValidTypes",_ValidTypes)
@@ -58,31 +118,6 @@ print( len(CurrentBuildProperties) )  # 3
 
 print( CurrentBuildProperties._fields )
 # outputs a tuple -> ('buildid', 'changelist', 'artifactpath')
-
-########################################################################################################
-# Alternative typing.NamedTuple if type hints are needed
-import typing
-import datetime
-
-class PersonInfo(typing.NamedTuple):
-    name: str 
-    sex: str
-    dob: datetime.date
-
-class PetInfo(typing.NamedTuple):
-    name: str
-    sex: str
-    dob: datetime.date
-
-Benson:PersonInfo = PersonInfo("Benson Yee","M",datetime.date(1970,1,26))
-print( Benson.dob )
-for idx, field in enumerate(PersonInfo._fields):
-    print(idx, field)
-
-print( isinstance(Benson, PetInfo) )
-print( isinstance(Benson, PersonInfo) )
-
- 
 
 Header = [  ("Key",20,True),
             ("Path",20,True),
