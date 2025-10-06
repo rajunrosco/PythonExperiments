@@ -1,8 +1,9 @@
 import os
-import sys
+import pathlib
 import win32com.client
 
-this_modulepath = os.path.dirname(os.path.realpath(__file__))
+this_modulepath = pathlib.Path(__file__).parent
+Test1_XL = (this_modulepath / "Test1.xlsx")
 
 def get_openworkbooks():
     com_app = win32com.client.dynamic.Dispatch('Excel.Application')
@@ -27,8 +28,11 @@ def modifyworkbook( workbookname ):
 
     # if workbookname was not currently open.  open it to edit and save change
     if not EditOpenWorkbook_FLAG:
-        wb = XL.Workbooks.Open("C:\\Temp\\"+workbookname)
+        wb = XL.Workbooks.Open(Test1_XL)
         ws = wb.ActiveSheet
+
+        #wb.RefreshAll() # if refresh is needed
+        #XL.CalculateUntilAsyncQueriesDone()  # make excel wait for Async Queries on data
         ws.Range("A10").Value = "Hello Dammit"
         wb.Save()
 
@@ -40,6 +44,6 @@ def modifyworkbook( workbookname ):
 #
 ###############################################################################################
 
-modifyworkbook('Clipboard2.xlsx')
+modifyworkbook(Test1_XL)
 
-modifyworkbook('Clipboard2.xlsx')
+modifyworkbook(Test1_XL)
