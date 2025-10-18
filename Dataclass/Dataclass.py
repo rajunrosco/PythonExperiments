@@ -116,20 +116,45 @@ employee_empty = Employee()
 
 fieldlist = Employee.fieldlist()
 
-json_employee1 = '''
-{
-    "Name": "Benson",
-    "Relatives" : ["Adrian","Anna","Cleon","Lily"],
-    "HomeAddress" : {"Address1":"3103", "Address2":"2000", "City":"SLC", "State":"UT", "Zip":"84109"},
-    "Id" : "E0001",
-    "Title" : "King",
-    "WorkAddress" : {"Address1":"1000", "Address2":"2000", "City":"SLC", "State":"UT", "Zip":"84101"}
-}
+json_employees = '''
+[
+    {
+        "Name": "Benson",
+        "Relatives" : ["Adrian","Anna","Cleon","Lily"],
+        "HomeAddress" : {"Address1":"3103", "Address2":"2000", "City":"SLC", "State":"UT", "Zip":"84109"},
+        "Id" : "E0001",
+        "Title" : "King",
+        "WorkAddress" : {"Address1":"1000", "Address2":"2000", "City":"SLC", "State":"UT", "Zip":"84101"}
+    },
+    {
+        "Name": "Phuong",
+        "Relatives" : ["An","Tony","Mai","Nuyget","Ping","Trung","Mui","Tai"],
+        "HomeAddress" : {"Address1":"3103", "Address2":"2000", "City":"SLC", "State":"UT", "Zip":"84109"},
+        "Id" : "E0002",
+        "Title" : "IT",
+        "WorkAddress" : {"Address1":"1000", "Address2":"2000", "City":"SLC", "State":"UT", "Zip":"84101"}
+    }
+]
 '''
 
-json_object = json.loads(json_employee1)
+employee_list = json.loads(json_employees)
 
-# Load dataclass with **json_object
-employee1 = Employee.from_dict(json_object)
+
+@dataclass
+class EmployeeLookup:
+    byId: dict = field(default_factory=dict)
+    byName: dict = field(default_factory=dict)
+
+    @classmethod
+    def from_employee_list(cls, employee_list: list[dict]):
+        lookup = cls()
+        for emp_data in employee_list:
+            emp = Employee.from_dict(emp_data)
+            lookup.byId[emp.Id] = emp
+            lookup.byName[emp.Name] = emp
+        return lookup
+
+employee_lookup = EmployeeLookup.from_employee_list(employee_list
+                                                    )
 
 print("End experiment")
