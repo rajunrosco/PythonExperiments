@@ -15,7 +15,7 @@ class CMetaClass:
         return [f.name for f in fields(cls)]  
     
     @classmethod
-    def from_data(cls, jsonstring:str):
+    def from_json(cls, jsonstring:str):
         jsondict = json.loads(jsonstring)
         fieldlist = cls.getfieldlist()
         # rebuild the jsondict with only fields that exist in the dataclass and use that to initialize the dataclass
@@ -62,10 +62,10 @@ PersonString = '''
 def main():
 
     # NOTE: PersonString has field for cell_phone that is ignored because the CPerson dataclass does not have it defined.  
-    PersonObj = CPerson.from_data(PersonString)
+    PersonObj = CPerson.from_json(PersonString)
 
     # NOTE: Creating an Employee object with PersonString will initialize fields of the CEmployee dataclass with initial values if data is not provided
-    EmployeeObj = CEmployee.from_data(PersonString)
+    EmployeeObj = CEmployee.from_json(PersonString)
     
     MysteryObj = PersonObj
 
