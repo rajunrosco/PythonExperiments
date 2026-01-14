@@ -1,4 +1,4 @@
 pip==18.1
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 setuptools==40.4.3
 wheel==0.32.2
