@@ -1,5 +1,5 @@
 import json
-
+import re
 
 #config = {
 #    "win64" : {"loose" : "//slc-files/windowsnoeditor/loose",
@@ -15,7 +15,7 @@ import json
 
 
 
-j = open("config.json","r")
+j = open("json/config.json","r")
 
 FileAsList = j.readlines()
 # filter all lines that begin with a # since these are comments in our configuration file
@@ -27,3 +27,33 @@ data = json.loads(FileString)
 print( data["xboxone"]["loose"])
 
 j.close()
+
+
+invalidjson = '''
+{
+    "field1": "value1",
+    "field2": "value2",
+    "list1" : [
+        "item1",
+        "item2",
+        "item3"
+    ],
+    "field3": "<speak prompt=\\"hello\\">"
+}
+'''
+
+# json.decoder.JSONDecodeError: Expecting value: line 9 column 5 (char 122)
+
+try:
+    json.loads(invalidjson)
+except json.decoder.JSONDecodeError as e:
+    print(e)
+    print(invalidjson.replace('\n','\\n'))
+    padlist = [" " for i in range(0,e.pos)]
+    pad = "".join(padlist)
+    print(pad+"^")
+
+
+
+
+
